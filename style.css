@@ -1,5 +1,5 @@
 @media (min-width: 200px)  {
-  #newBookForm {
+  .smallerFont {
     font-size: 0.7rem;
   }
   #bookInfo
@@ -10,7 +10,7 @@
 }
 
 @media (min-width: 500px)  {
-  #newBookForm {
+  .smallerFont {
     font-size: 0.8rem;
   }
   #bookInfo
