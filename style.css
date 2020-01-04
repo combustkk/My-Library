@@ -1,0 +1,20 @@
+@media (min-width: 200px)  {
+  #newBookForm {
+    font-size: 0.7rem;
+  }
+  #bookInfo
+  {
+    flex-direction: column;
+  }
+
+}
+
+@media (min-width: 500px)  {
+  #newBookForm {
+    font-size: 0.8rem;
+  }
+  #bookInfo
+  {
+    flex-direction: row;
+  }
+}
