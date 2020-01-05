@@ -1,10 +1,12 @@
 body
 {
   background-color: black;
+  height:100%;
 }
 html
 {
   background-color: black;
+  height:100%;
 }
 
 @media (min-width: 200px)  {
@@ -32,6 +34,24 @@ html
   font-size: 0.7rem;
   text-align: center;
 }
-.table {
-   text-align: center;
+
+.table th{
+  table-layout: fixed;
+  text-align: center;
+  vertical-align: middle;
+  overflow: visible;
+}
+
+.table td{
+  text-align: center;
+  vertical-align: middle;
+  overflow: visible;
+}
+#rm-btn
+{
+  width:20px;
+}
+.table-div
+{
+  height:100%;
 }

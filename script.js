@@ -14,14 +14,64 @@ function Book(title, author, pages, status)
   this.status = status;
 }
 
+function addDropDown(newBook)
+{
+  const val = newBook.status;
+  let dropdownGroup = document.createElement("div");
+  //data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+  dropdownGroup.textContent = val;
+  let dropdownBtn = document.createElement("button");
+  dropdownBtn.setAttribute("data-toggle", "dropdown");
+  dropdownBtn.setAttribute("aria-haspopup", "true");
+  dropdownBtn.setAttribute("expanded", "false");
+  dropdownBtn.classList.add("btn");
+  dropdownBtn.classList.add("btn-sm");
+  dropdownBtn.classList.add("dropdown-toggle");
+  dropdownBtn.id="dropdownMenuButton";
+  const statuses = ["In Progress", "Want to read", "Finished", "Given Up"];
+  let dropdownDiv = document.createElement("div");
+  dropdownDiv.setAttribute("aria-labelledby", "dropdownMenuButton");
+  dropdownDiv.classList.add("dropdown-menu");
+  for(i of statuses)
+  {
+      if(i != val)
+      {
+        let dropdownItem = document.createElement("a");
+        dropdownItem.href="#";
+        dropdownItem.innerHTML = i;
+        dropdownItem.classList.add("dropdown-item");
+        dropdownItem.style = "font-size:0.7rem";
+        dropdownDiv.appendChild(dropdownItem);
+        dropdownItem.addEventListener("click", ()=>
+        {
+          newBook.status = dropdownItem.innerHTML;
+          newBookString = JSON.stringify(newBook);
+          myLibrary.set(newBook.title, newBookString);
+          localStorage.setItem(newBook.title, newBookString);
+          table.innerHTML = "";
+          render();
+        });
+      }
+  }
+  dropdownGroup.appendChild(dropdownBtn);
+  dropdownGroup.appendChild(dropdownDiv);
+  dropdownGroup.classList.add("dropdown");
+  return dropdownGroup;
+}
+
+
 function addRow(newBook)
 {
   let row = table.insertRow();
+  let cell;
   for (let i in newBook)
   {
-    row.insertCell().innerHTML=newBook[i];
+    cell = row.insertCell();
+    cell.innerHTML=newBook[i];
   }
-  deleteBtn = document.createElement("button");
+  cell.innerHTML = "";
+  cell.appendChild(addDropDown(newBook));
+  let deleteBtn = document.createElement("button");
   deleteBtn.classList.add("btn-circle");
   deleteBtn.classList.add("btn-danger");
   deleteBtn.innerHTML = "x";
