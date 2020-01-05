@@ -39,19 +39,24 @@ html
   table-layout: fixed;
   text-align: center;
   vertical-align: middle;
-  overflow: visible;
 }
 
 .table td{
+  table-layout: fixed;
   text-align: center;
   vertical-align: middle;
   overflow: visible;
 }
 #rm-btn
 {
-  width:20px;
+  width:5%;
 }
 .table-div
 {
   height:100%;
+}
+
+.content-col
+{
+  width:23.75%;
 }
