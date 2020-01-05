@@ -1,4 +1,4 @@
-let myLibrary = []
+let myLibrary = new Map();
 const newBookBtn = document.getElementById("newBookBtn");
 const author = document.getElementById("author");
 const title = document.getElementById("title");
@@ -14,9 +14,29 @@ function Book(title, author, pages, status)
   this.status = status;
 }
 
-function addBookToLibrary() {
+function addRow(newBook)
+{
+  let row = table.insertRow();
+  for (let i in newBook)
+  {
+    row.insertCell().innerHTML=newBook[i];
+  }
+  deleteBtn = document.createElement("button");
+  deleteBtn.classList.add("btn-circle");
+  deleteBtn.classList.add("btn-danger");
+  deleteBtn.innerHTML = "x";
+  deleteBtn.style = "float: right";
+  row.insertCell().appendChild(deleteBtn);
+  deleteBtn.addEventListener("click", ()=>
+  {
+    table.deleteRow(row.index);
+    myLibrary.delete(row.cells[0].innerHTML);
+    localStorage.removeItem(row.cells[0].innerHTML);
+  });
+}
 
-  //localStorage.setItem(title, JSON.stringify(newBook);
+
+function addBookToLibrary() {
   let statusValue;
   status.forEach((st)=>{
       if(st.checked)
@@ -27,24 +47,25 @@ function addBookToLibrary() {
     }
   )
   let newBook = new Book(title.value, author.value, pages.value,statusValue);
-  console.log(newBook);
-  let row = table.insertRow();
-  for (let i in newBook)
-  {
-    row.insertCell().innerHTML=newBook[i];
-  }
-
+  addRow(newBook);
   title.value="";
   author.value="";
   pages.value="";
-
-  myLibrary.push(newBook);
+  newBookString = JSON.stringify(newBook);
+  myLibrary.set(newBook.title, newBookString);
+  localStorage.setItem(newBook.title, newBookString);
+  table.innerHTML = "";
+  render();
 }
 
 function render()
 {
-  for(let i of myLibrary)
+  for(let i = 0; i < localStorage.length; i++)
   {
-    console.log(i);
+    let bookString = localStorage.getItem(localStorage.key(i));
+    addRow(JSON.parse(bookString));
+    myLibrary.set(localStorage.key(i), bookString);
   }
 }
+
+render();
