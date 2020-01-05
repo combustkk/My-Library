@@ -34,7 +34,10 @@ html
   font-size: 0.7rem;
   text-align: center;
 }
-
+table, td, th
+{
+  border-collapse: collapse;
+}
 .table th{
   table-layout: fixed;
   text-align: center;
@@ -42,21 +45,10 @@ html
 }
 
 .table td{
-  table-layout: fixed;
   text-align: center;
   vertical-align: middle;
-  overflow: visible;
-}
-#rm-btn
-{
-  width:5%;
 }
 .table-div
 {
   height:100%;
-}
-
-.content-col
-{
-  width:23.75%;
 }
